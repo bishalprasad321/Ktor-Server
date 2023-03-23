@@ -434,13 +434,11 @@ class HeroRepositoryImpl: HeroRepository {
 
     private fun findHeroes(query: String?): List<Hero> {
         val founded = mutableListOf<Hero>()
-        return if (query.isNullOrEmpty()) {
+        return if (!query.isNullOrEmpty()) {
             heroes.forEach { (_, heroes) ->
                 heroes.forEach { hero ->
-                    if (query != null) {
-                        if (hero.name.lowercase().contains(query.lowercase())) {
-                            founded.add(hero)
-                        }
+                    if (hero.name.lowercase().contains(query.lowercase())) {
+                        founded.add(hero)
                     }
                 }
             }

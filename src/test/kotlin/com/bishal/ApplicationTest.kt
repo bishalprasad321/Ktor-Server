@@ -105,15 +105,16 @@ class ApplicationTest {
                     actual = response.status()
                 )
 
+                val actual = Json.decodeFromString<ApiResponse>(response.content.toString())
+
                 val expected = ApiResponse(
                     success = true,
                     message = "ok",
                     prevPage = null,
                     nextPage = 2,
                     heroes = heroRepository.page1,
+                    lastUpdated = actual.lastUpdated
                 )
-
-                val actual = Json.decodeFromString<ApiResponse>(response.content.toString())
 
                 assertEquals(
                     expected = expected,
